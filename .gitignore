@@ -10,12 +10,10 @@
 # vendoring cache directory
 .cache
 
-# Go workspace files
-.env.override
 
-# Env файлы с паролями
-.env
-.env.*
+# macOS системные файлы
+.DS_Store
+**/.DS_Store
 
 # Отчёты (генерируются автоматически)
 reports/
