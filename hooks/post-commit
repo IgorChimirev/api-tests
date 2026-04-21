@@ -1,0 +1,150 @@
+#!/bin/sh
+
+# Защита от бесконечного цикла
+LOCK_FILE=".git/post-commit-running"
+if [ -f "$LOCK_FILE" ]; then
+  exit 0
+fi
+touch "$LOCK_FILE"
+trap 'rm -f "$LOCK_FILE"' EXIT
+
+REPORT_DIR="reports"
+mkdir -p "$REPORT_DIR"
+
+REPORT_FILE="$REPORT_DIR/latest.md"
+
+COMMIT_HASH=$(git log -1 --format="%h")
+COMMIT_MSG=$(git log -1 --format="%s")
+COMMIT_AUTHOR=$(git log -1 --format="%an")
+COMMIT_DATE=$(git log -1 --format="%cd" --date=format:"%Y-%m-%d %H:%M:%S")
+TOTAL_COMMITS=$(git rev-list --count HEAD)
+
+echo "📊 Генерируем отчёт..."
+
+# ========================
+# ЗАПУСК ТЕСТОВ
+# ========================
+echo "  🧪 Запускаем тесты..."
+TEST_OUTPUT=$(go test -v ./... 2>&1)
+TEST_EXIT=$?
+
+TESTS_PASSED=$(echo "$TEST_OUTPUT" | awk '/--- PASS:/{count++} END{print count+0}')
+TESTS_FAILED=$(echo "$TEST_OUTPUT" | awk '/--- FAIL:/{count++} END{print count+0}')
+
+if [ $TEST_EXIT -eq 0 ]; then
+  TEST_STATUS="✅ Все тесты прошли"
+else
+  TEST_STATUS="❌ Есть упавшие тесты"
+fi
+
+# ========================
+# ЗАПУСК ЛИНТЕРА
+# ========================
+echo "  🔍 Запускаем линтер..."
+LINT_OUTPUT=$(golangci-lint run 2>&1)
+LINT_EXIT=$?
+
+if [ $LINT_EXIT -eq 0 ]; then
+  LINT_STATUS="✅ Ошибок не найдено"
+  LINT_OUTPUT="Ошибок не найдено"
+else
+  LINT_STATUS="❌ Найдены ошибки"
+fi
+
+# ========================
+# СТАТИСТИКА КОДА
+# ========================
+GO_FILES=$(find . -name "*.go" -not -path "./.git/*" | wc -l | tr -d ' ')
+TEST_FILES=$(find . -name "*_test.go" -not -path "./.git/*" | wc -l | tr -d ' ')
+LINES=$(find . -name "*.go" -not -path "./.git/*" -exec wc -l {} + 2>/dev/null | tail -1 | awk '{print $1}')
+
+# ========================
+# ПИШЕМ ОТЧЁТ
+# ========================
+cat > "$REPORT_FILE" << EOF
+# 📋 Отчёт по проекту
+
+> Сгенерировано автоматически при коммите
+
+---
+
+## 🔖 Информация о коммите
+
+| Параметр | Значение |
+|----------|----------|
+| Хэш | \`$COMMIT_HASH\` |
+| Сообщение | $COMMIT_MSG |
+| Автор | $COMMIT_AUTHOR |
+| Дата | $COMMIT_DATE |
+| Всего коммитов | $TOTAL_COMMITS |
+
+---
+
+## 🧪 Результаты тестов
+
+**Статус: $TEST_STATUS**
+
+| Метрика | Значение |
+|---------|----------|
+| Прошло | ✅ $TESTS_PASSED |
+| Упало | ❌ $TESTS_FAILED |
+
+<details>
+<summary>Полный вывод тестов</summary>
+
+\`\`\`
+$TEST_OUTPUT
+\`\`\`
+
+</details>
+
+---
+
+## 🔍 Результаты линтера
+
+**Статус: $LINT_STATUS**
+
+<details>
+<summary>Полный вывод линтера</summary>
+
+\`\`\`
+$LINT_OUTPUT
+\`\`\`
+
+</details>
+
+---
+
+## 📁 Статистика кода
+
+| Метрика | Значение |
+|---------|----------|
+| Go файлов | $GO_FILES |
+| Тест файлов | $TEST_FILES |
+| Строк кода | $LINES |
+
+---
+
+## 🗂 Тест-сценарии
+
+EOF
+
+# Добавляем список всех тестов
+echo "### Advertisement" >> "$REPORT_FILE"
+grep -h "^func (s \*TestSuite) Test" tests/scenarios/advertisement/advertisement_test.go 2>/dev/null | \
+  sed 's/func (s \*TestSuite) /- ✅ /' | sed 's/()//' >> "$REPORT_FILE"
+
+echo "" >> "$REPORT_FILE"
+echo "### My Advertisements" >> "$REPORT_FILE"
+grep -h "^func (s \*TestSuite) Test" tests/scenarios/myAdvertisement/myAdvertisements_test.go 2>/dev/null | \
+  sed 's/func (s \*TestSuite) /- ✅ /' | sed 's/()//' >> "$REPORT_FILE"
+
+echo "" >> "$REPORT_FILE"
+echo "---" >> "$REPORT_FILE"
+echo "_Отчёт создан: $(date '+%Y-%m-%d %H:%M:%S')_" >> "$REPORT_FILE"
+
+# Добавляем отчёт в коммит
+git add "$REPORT_FILE"
+git commit --amend --no-edit --no-verify
+
+echo "✅ Отчёт сохранён и добавлен в коммит: $REPORT_FILE"
