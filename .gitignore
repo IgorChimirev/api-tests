@@ -12,3 +12,15 @@
 
 # Go workspace files
 .env.override
+
+# Env файлы с паролями
+.env
+.env.*
+
+# Отчёты (генерируются автоматически)
+reports/
+
+# Видео и медиафайлы
+*.mp4
+*.mov
+*.avi
