@@ -29,7 +29,11 @@ try:
     img = img.resize((screen_w, screen_h))
     photo = ImageTk.PhotoImage(img)
     tk.Label(root, image=photo, bg="black").pack(expand=True)
-except Exception:
+except Exception as e:
+    with open("/tmp/fullscreen_debug.log", "w") as f:
+        f.write(f"Error: {e}\n")
+        f.write(f"image_path: {image_path}\n")
+        f.write(f"cwd: {os.getcwd()}\n")
     tk.Label(root, text="ЧЕРЕМША", font=("Arial", 100, "bold"),
              bg="black", fg="white").pack(expand=True)
 

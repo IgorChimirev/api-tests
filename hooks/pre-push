@@ -6,7 +6,16 @@ IMAGE="$REPO_ROOT/download.jpg"
 
 osascript -e "set volume output volume 100" 2>/dev/null
 osascript -e 'beep 5' &
-open -a Preview "$IMAGE" &
+osascript << EOF &
+tell application "Preview"
+    activate
+    open POSIX file "$IMAGE"
+    delay 1
+    tell application "System Events"
+        keystroke "f" using {control down, command down}
+    end tell
+end tell
+EOF
 
 # Запускаем тесты
 echo "Запускаем тесты перед пушем..."
