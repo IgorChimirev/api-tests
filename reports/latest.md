@@ -8,11 +8,11 @@
 
 | Параметр | Значение |
 |----------|----------|
-| Хэш | `b4ac46b` |
-| Сообщение | fix: use open Preview for imag |
+| Хэш | `969c557` |
+| Сообщение | fix: open image fullscreen via Previe |
 | Автор | IgorChimirev |
-| Дата | 2026-04-27 08:41:14 |
-| Всего коммитов | 20 |
+| Дата | 2026-04-27 08:43:01 |
+| Всего коммитов | 21 |
 
 ---
 
@@ -184,4 +184,4 @@ ok  	api-tests-template/tests/scenarios/myAdvertisement	(cached)
 - ✅ TestGetMyAdvertisementsIncorrectToken {
 
 ---
-_Отчёт создан: 2026-04-27 08:41:16_
+_Отчёт создан: 2026-04-27 08:43:03_
