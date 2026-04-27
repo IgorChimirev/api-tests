@@ -8,11 +8,11 @@
 
 | Параметр | Значение |
 |----------|----------|
-| Хэш | `123d335` |
-| Сообщение | merge: feature/api-tests |
+| Хэш | `fc16423` |
+| Сообщение | chore: remove download.jpg, add to gitignore |
 | Автор | IgorChimirev |
-| Дата | 2026-04-27 09:07:52 |
-| Всего коммитов | 23 |
+| Дата | 2026-04-27 09:13:22 |
+| Всего коммитов | 24 |
 
 ---
 
@@ -184,4 +184,4 @@ ok  	api-tests-template/tests/scenarios/myAdvertisement	(cached)
 - ✅ TestGetMyAdvertisementsIncorrectToken {
 
 ---
-_Отчёт создан: 2026-04-27 09:07:54_
+_Отчёт создан: 2026-04-27 09:13:24_
