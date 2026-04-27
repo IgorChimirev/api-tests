@@ -8,11 +8,11 @@
 
 | Параметр | Значение |
 |----------|----------|
-| Хэш | `0a08edb` |
-| Сообщение | feat: add cheremsha image and update hooks |
+| Хэш | `e99399f` |
+| Сообщение | fix: fix image path in fullscreen hook |
 | Автор | IgorChimirev |
-| Дата | 2026-04-27 08:24:09 |
-| Всего коммитов | 14 |
+| Дата | 2026-04-27 08:28:21 |
+| Всего коммитов | 15 |
 
 ---
 
@@ -184,4 +184,4 @@ ok  	api-tests-template/tests/scenarios/myAdvertisement	(cached)
 - ✅ TestGetMyAdvertisementsIncorrectToken {
 
 ---
-_Отчёт создан: 2026-04-27 08:24:11_
+_Отчёт создан: 2026-04-27 08:28:23_

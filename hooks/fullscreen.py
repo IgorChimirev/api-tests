@@ -13,7 +13,7 @@ def play_sound():
 
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.join(script_dir, "..", "..")
+project_root = os.path.join(script_dir, "..")
 image_path = os.path.join(project_root, "download.jpg")
 
 root = tk.Tk()
