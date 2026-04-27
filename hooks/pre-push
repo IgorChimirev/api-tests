@@ -1,29 +1,26 @@
 #!/bin/sh
 
-# Показываем ЧЕРЕМШУ через Quick Look + громкий звук
-REPO_ROOT=$(git rev-parse --show-toplevel)
-IMAGE="$REPO_ROOT/download.jpg"
+# Запрет пуша в main/master
+BRANCH=$(git branch --show-current)
+if [ "$BRANCH" = "main" ] || [ "$BRANCH" = "master" ]; then
+  echo " Нельзя пушить напрямую в $BRANCH!"
+  echo "Необходимосоздать отдельную ветку: git checkout -b feature/my-feature"
+  exit 1
+fi
 
-osascript -e "set volume output volume 100" 2>/dev/null
-osascript -e 'beep 5' &
-osascript << EOF &
-tell application "Preview"
-    activate
-    open POSIX file "$IMAGE"
-    delay 1
-    tell application "System Events"
-        keystroke "f" using {control down, command down}
-    end tell
-end tell
-EOF
 
-# Запускаем тесты
-echo "Запускаем тесты перед пушем..."
+golangci-lint run
+if [ $? -ne 0 ]; then
+  echo "Линтер нашёл ошибки. "
+  exit 1
+fi
+echo "Линтер прошёл успешно."
+
+
+echo "Запускаем тесты..."
 go test ./...
-
 if [ $? -ne 0 ]; then
   echo "Тесты упали. Пуш отменён."
   exit 1
 fi
 
-echo "Все тесты прошли. Пуш продолжается. 🚀"

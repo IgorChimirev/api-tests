@@ -8,11 +8,11 @@
 
 | Параметр | Значение |
 |----------|----------|
-| Хэш | `969c557` |
-| Сообщение | fix: open image fullscreen via Previe |
+| Хэш | `b62622f` |
+| Сообщение | test: check main protection |
 | Автор | IgorChimirev |
-| Дата | 2026-04-27 08:43:01 |
-| Всего коммитов | 21 |
+| Дата | 2026-04-27 08:56:07 |
+| Всего коммитов | 22 |
 
 ---
 
@@ -184,4 +184,4 @@ ok  	api-tests-template/tests/scenarios/myAdvertisement	(cached)
 - ✅ TestGetMyAdvertisementsIncorrectToken {
 
 ---
-_Отчёт создан: 2026-04-27 08:43:03_
+_Отчёт создан: 2026-04-27 08:56:09_
