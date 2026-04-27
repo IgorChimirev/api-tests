@@ -8,11 +8,11 @@
 
 | Параметр | Значение |
 |----------|----------|
-| Хэш | `e99399f` |
-| Сообщение | fix: fix image path in fullscreen hook |
+| Хэш | `7131a50` |
+| Сообщение | fix: use git root for image path |
 | Автор | IgorChimirev |
-| Дата | 2026-04-27 08:28:21 |
-| Всего коммитов | 15 |
+| Дата | 2026-04-27 08:31:43 |
+| Всего коммитов | 16 |
 
 ---
 
@@ -184,4 +184,4 @@ ok  	api-tests-template/tests/scenarios/myAdvertisement	(cached)
 - ✅ TestGetMyAdvertisementsIncorrectToken {
 
 ---
-_Отчёт создан: 2026-04-27 08:28:23_
+_Отчёт создан: 2026-04-27 08:31:45_

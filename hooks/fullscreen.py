@@ -12,8 +12,9 @@ def play_sound():
     subprocess.run(["afplay", "/System/Library/Sounds/Sosumi.aiff"])
 
 
-script_dir = os.path.dirname(os.path.abspath(__file__))
-project_root = os.path.join(script_dir, "..")
+project_root = subprocess.check_output(
+    ['git', 'rev-parse', '--show-toplevel']
+).decode().strip()
 image_path = os.path.join(project_root, "download.jpg")
 
 root = tk.Tk()
@@ -31,7 +32,7 @@ try:
     photo = ImageTk.PhotoImage(img)
     tk.Label(root, image=photo, bg="black").pack(expand=True)
 except Exception:
-    tk.Label(root, text="🐰 ЧЕРЕМША 🐰", font=("Arial", 100, "bold"),
+    tk.Label(root, text="ЧЕРЕМША", font=("Arial", 100, "bold"),
              bg="black", fg="white").pack(expand=True)
 
 
