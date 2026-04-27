@@ -8,11 +8,11 @@
 
 | Параметр | Значение |
 |----------|----------|
-| Хэш | `8efd78d` |
-| Сообщение | fix: use qlmanage instead of Python for image display |
+| Хэш | `f8a06c0` |
+| Сообщение | fix: use open Preview for image |
 | Автор | IgorChimirev |
-| Дата | 2026-04-27 08:37:51 |
-| Всего коммитов | 18 |
+| Дата | 2026-04-27 08:39:32 |
+| Всего коммитов | 19 |
 
 ---
 
@@ -184,4 +184,4 @@ ok  	api-tests-template/tests/scenarios/myAdvertisement	(cached)
 - ✅ TestGetMyAdvertisementsIncorrectToken {
 
 ---
-_Отчёт создан: 2026-04-27 08:37:53_
+_Отчёт создан: 2026-04-27 08:39:34_

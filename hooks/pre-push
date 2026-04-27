@@ -5,8 +5,8 @@ REPO_ROOT=$(git rev-parse --show-toplevel)
 IMAGE="$REPO_ROOT/download.jpg"
 
 osascript -e "set volume output volume 100" 2>/dev/null
-afplay /System/Library/Sounds/Sosumi.aiff &
-qlmanage -p "$IMAGE" > /dev/null 2>&1 &
+osascript -e 'beep 5' &
+open -a Preview "$IMAGE" &
 
 # Запускаем тесты
 echo "Запускаем тесты перед пушем..."
