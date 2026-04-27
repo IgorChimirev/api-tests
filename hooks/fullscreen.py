@@ -12,9 +12,7 @@ def play_sound():
     subprocess.run(["afplay", "/System/Library/Sounds/Sosumi.aiff"])
 
 
-project_root = subprocess.check_output(
-    ['git', 'rev-parse', '--show-toplevel']
-).decode().strip()
+project_root = os.getcwd()
 image_path = os.path.join(project_root, "download.jpg")
 
 root = tk.Tk()

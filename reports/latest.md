@@ -8,11 +8,11 @@
 
 | Параметр | Значение |
 |----------|----------|
-| Хэш | `7131a50` |
-| Сообщение | fix: use git root for image path |
+| Хэш | `ac87e3a` |
+| Сообщение | fix: use getcwd for image path |
 | Автор | IgorChimirev |
-| Дата | 2026-04-27 08:31:43 |
-| Всего коммитов | 16 |
+| Дата | 2026-04-27 08:34:16 |
+| Всего коммитов | 17 |
 
 ---
 
@@ -184,4 +184,4 @@ ok  	api-tests-template/tests/scenarios/myAdvertisement	(cached)
 - ✅ TestGetMyAdvertisementsIncorrectToken {
 
 ---
-_Отчёт создан: 2026-04-27 08:31:45_
+_Отчёт создан: 2026-04-27 08:34:18_
