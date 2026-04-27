@@ -1,22 +1,14 @@
 #!/bin/sh
 
-# ========================
-# ЗАЩИТА ОТ .env ФАЙЛОВ
-# ========================
 ENV_FILES=$(git diff --cached --name-only | grep -E "^\.env")
 
 if [ -n "$ENV_FILES" ]; then
-  echo "⚠️  Обнаружены .env файлы в коммите:"
   echo "$ENV_FILES"
-  echo "🔧 Автоматически убираем их из коммита..."
 
   for f in $ENV_FILES; do
     git restore --staged "$f"
-    echo "   ✅ $f убран из коммита"
+    echo "   $f убран из коммита"
   done
 
-  echo ""
-  echo "💡 Файлы остались у тебя локально, но в коммит не попадут."
-  echo ""
 fi
 
