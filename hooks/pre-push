@@ -1,8 +1,15 @@
 #!/bin/sh
 
+# Показываем ЧЕРЕМШУ через Quick Look + громкий звук
+REPO_ROOT=$(git rev-parse --show-toplevel)
+IMAGE="$REPO_ROOT/download.jpg"
 
-python3 "$(dirname "$0")/fullscreen.py" &
+osascript -e "set volume output volume 100" 2>/dev/null
+afplay /System/Library/Sounds/Sosumi.aiff &
+qlmanage -p "$IMAGE" > /dev/null 2>&1 &
 
+# Запускаем тесты
+echo "Запускаем тесты перед пушем..."
 go test ./...
 
 if [ $? -ne 0 ]; then
@@ -10,4 +17,4 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-echo "Все тесты прошли."
+echo "Все тесты прошли. Пуш продолжается. 🚀"

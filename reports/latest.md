@@ -8,11 +8,11 @@
 
 | Параметр | Значение |
 |----------|----------|
-| Хэш | `ac87e3a` |
-| Сообщение | fix: use getcwd for image path |
+| Хэш | `8efd78d` |
+| Сообщение | fix: use qlmanage instead of Python for image display |
 | Автор | IgorChimirev |
-| Дата | 2026-04-27 08:34:16 |
-| Всего коммитов | 17 |
+| Дата | 2026-04-27 08:37:51 |
+| Всего коммитов | 18 |
 
 ---
 
@@ -184,4 +184,4 @@ ok  	api-tests-template/tests/scenarios/myAdvertisement	(cached)
 - ✅ TestGetMyAdvertisementsIncorrectToken {
 
 ---
-_Отчёт создан: 2026-04-27 08:34:18_
+_Отчёт создан: 2026-04-27 08:37:53_
